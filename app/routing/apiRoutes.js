@@ -7,7 +7,7 @@ let friend = function Friend(name, photo, scores){
 	this.name = name,
 	this.sphoto = photo,
 	this.scores = scores
-}
+};
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -17,12 +17,13 @@ app.get("/api/friends", function(req, res) {
   res.json(friends);
 });
 
-app.post('/api/friends', function (req, res) {
+app.post("/api/friends", function (req, res) {
 	console.log('reserve request submitted');
 	console.log(req.body);
+let newFriend = req.body;
 
-  let newFriend = new Friend(req.body);
   friends.push(newFriend);
+  res.json(friends);
 
 });
 }
