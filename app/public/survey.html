@@ -150,9 +150,12 @@ let sum = 0;
         photo: $("#photo").val(),
         scores: [$("#q1").val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(), $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val(), $("#q10").val()]
       };
-for(i = 0; i < newFriend.scores; i++){
+for(i = 0; i < newFriend.scores.length; i++){
 	sum += newFriend.scores[i];
 };
+for(j = 0; j < friends.length; i++){
+	
+}
       // Question: What does this code do??
       $.post("/api/friends", newFriend)
         .then(function(data) {
