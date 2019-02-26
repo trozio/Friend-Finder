@@ -30,7 +30,7 @@ app.post("/api/friends", function (req, res) {
   let matchImage = "";
   let totalDifference = 10000;
 
-  for (var i = 0; i < friends.length; i++) {
+  for (i = 0; i < friends.length; i++) {
 
 	  let diff = 0;
 	  for (j = 0; j < userResponses.length; j++) {
