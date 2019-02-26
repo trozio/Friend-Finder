@@ -135,15 +135,35 @@
  	 <option>5</option>
     </select>
   </div>
-  <button type="submit" class="btn btn-primary btn-lg" id="submit"><i class="fa fa-check-circle" aria-hidden="true"></i>
+  <button type="submit" class="btn btn-primary btn-lg" data-toggle="modal" data-target="modal" id="submit"><i class="fa fa-check-circle" aria-hidden="true"></i>
      Submit</button>
 </form>
+
+
+
+	<div class="modal" id="modal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+		<h4>Closest Friend</h4>
+      <div class="modal-header">
+        <h5 class="modal-title" id="userMatch"></h5>
+        <img id="userMatchImage" width="650" src="">
+      </div>
+	  <div class="modal-footer">
+	  			<a href="/survey" class="modal-action modal-close waves-effect waves-green btn-flat">Fill Again!</a>
+	  		</div>
+
+    </div>
+  </div>
+</div>
 
 <script type="text/javascript">
 
 
+
 	$("#submit").on("click", function(event) {
       event.preventDefault();
+
 let sum = 0;
       let newFriend = {
         name: $("#name").val(),
@@ -151,19 +171,16 @@ let sum = 0;
         scores: [$("#q1").val(), $("#q2").val(), $("#q3").val(), $("#q4").val(), $("#q5").val(), $("#q6").val(), $("#q7").val(), $("#q8").val(), $("#q9").val(), $("#q10").val()]
       };
 
-for(j = 0; j < friends.length; j++){
-	for(i = 0; i < friends[j].scores.length; i++){
-		if (newFriend.scores[i] !== friends[j].scores[i]){
-			let diff = newFriend.scores[i] -= friends[j].scores[i];
-			sum = sum + Math.abs(diff);
-		}
-	};
-};
 
       $.post("/api/friends", newFriend)
         .then(function(data) {
+			$('#userMatch').html(data.matchName);
+		    	$("#userMatchImage").attr("src", data.matchImage);
+
+
           console.log(data);
-          alert("Adding character...");
+
+
         });
 
     });
